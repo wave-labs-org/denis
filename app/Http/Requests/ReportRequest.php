@@ -38,7 +38,13 @@ class ReportRequest extends FormRequest
             $rugosity = 7;
             $otherRugosity = $this->debris_rugosity;
         }
-        $country = Country::where('name', 'like', '%' . $this->country . '%')->first();
+
+        // verify if country can be cast to integer, if not try to find the country by name
+        if (!is_numeric($this->country)) {
+            $country = Country::where('name', 'like', '%' . $this->country . '%')->first();
+        } else {
+            $country = Country::find($this->country);
+        }
 
         $this->merge([
             'date' => $this->date_type == "range" ? $this->date[0] : $this->date,
