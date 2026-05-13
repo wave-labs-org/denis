@@ -1,10 +1,10 @@
-import React from 'react'
-import styled from 'styled-components';
-import About from './Homepage/About';
-import Partners from './Homepage/Partners';
-import Timeline from './Homepage/Timeline';
-import Faq from './Homepage/Faq';
-import Navbar from './Navbar';
+import React from "react";
+import styled from "styled-components";
+import About from "./Homepage/About";
+import Partners from "./Homepage/Partners";
+import Timeline from "./Homepage/Timeline";
+import Faq from "./Homepage/Faq";
+import Navbar from "./Navbar";
 
 const Container = styled.div`
     scroll-behavior: smooth;
@@ -36,9 +36,13 @@ function Homepage() {
                 <Partners />
                 {/* <Timeline /> */}
             </Content>
-            <Contact style={{ marginTop: "50px" }}> Want to help or still have questions? Contact us at <a href="mailto:info@denis-db.com">info@denis-db.com</a> </Contact>
+            <Contact style={{ marginTop: "50px" }}>
+                With support from MARE - Centro de Ciências do Mar e do
+                Ambiente, ref.ª UID/04292/2025, DOI:
+                https://doi.org/10.54499/UID/04292/2025.
+            </Contact>
         </Container>
-    )
+    );
 }
 
-export default Homepage
+export default Homepage;
