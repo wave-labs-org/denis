@@ -452,8 +452,6 @@ function Repository(props) {
                     </div>
                 </div>
             </Content>
-
-            <center>teste</center>
         </Container>
     );
 }
