@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ExportReportController;
 use App\Http\Controllers\ExportTemplateInvokable;
+use App\Http\Controllers\RepositoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -99,3 +100,7 @@ Route::prefix('selector')->group(function () {
         Route::get('/subcategories', 'App\Http\Controllers\SelectorController@debrisSubcategories');
     });
 });
+
+
+Route::get('/repositories/{doi}', [RepositoryController::class, 'show'])
+    ->where('doi', '.*');

@@ -28,7 +28,7 @@ import site from './redux/site'
 
 import report from './redux/report'
 import collection from './redux/collection'
-
+import repository from './redux/repository'
 
 const reducer = combineReducers({
     auth,
@@ -58,7 +58,8 @@ const reducer = combineReducers({
     taxaNativeRegion,
 
     report,
-    collection
+    collection,
+    repository
 
 })
 

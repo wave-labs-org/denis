@@ -1,11 +1,11 @@
-import { Dropdown, Menu } from 'antd';
-import React from 'react'
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { dimensions } from './Dashboard/dashboardHelper';
+import { Dropdown, Menu } from "antd";
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { dimensions } from "./Dashboard/dashboardHelper";
 import { logout, setAuthorizationToken } from "../redux/auth/actions";
-import { colors } from '../helper';
+import { colors } from "../helper";
 
 const FlexContainer = styled.section`
     position: fixed;
@@ -20,15 +20,15 @@ const FlexContainer = styled.section`
     box-sizing: border-box;
 
     .link {
-        color: rgba(0,0,0, .8); 
-        transition: color .3s ease;
-        cursor: pointer;  
+        color: rgba(0, 0, 0, 0.8);
+        transition: color 0.3s ease;
+        cursor: pointer;
         font-size: 16px;
 
         &:hover {
             color: black;
         }
-    }  
+    }
 
     .login {
         background-color: ${colors.main};
@@ -63,7 +63,7 @@ const FlexContainer = styled.section`
 
 const Logo = styled.div`
     width: 50%;
-    color: white;    
+    color: white;
     position: relative;
 
     .logo {
@@ -72,16 +72,15 @@ const Logo = styled.div`
         display: none;
     }
 
-    
     h1 {
         width: 100%;
         box-sizing: border-box;
-        margin:0px;
+        margin: 0px;
         font-size: clamp(32px, 6vw, 50px);
         color: inherit;
         font-weight: 100;
         line-height: 94%;
-        font-family: 'Prata', serif;
+        font-family: "Prata", serif;
         letter-spacing: 0.041em;
     }
 
@@ -101,7 +100,6 @@ const Logo = styled.div`
         width: 100%;
 
         .menu {
-            
             filter: invert(100%);
         }
     }
@@ -112,7 +110,7 @@ const Logo = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: rgba(255,255,255,.6);
+        background-color: rgba(255, 255, 255, 0.6);
         padding: 10px;
         box-sizing: border-box;
         border-radius: 12px;
@@ -121,11 +119,9 @@ const Logo = styled.div`
             position: relative;
             display: block;
             filter: invert(0%);
-            
 
             img {
                 width: 35px;
-                
             }
         }
 
@@ -133,11 +129,7 @@ const Logo = styled.div`
             display: block;
         }
     }
-
-
-    
 `;
-
 
 const Login = styled.div`
     width: 50%;
@@ -145,7 +137,7 @@ const Login = styled.div`
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    position:relative;
+    position: relative;
 
     .logo {
         max-width: 300px;
@@ -168,24 +160,21 @@ const Login = styled.div`
     @media (max-width: ${dimensions.xl}) {
         font-size: 14px;
         gap: 10px;
-        
 
         .logo {
             margin-left: 50px;
         }
-        
     }
 
     @media (max-width: ${dimensions.lg}) {
         width: 100%;
         margin: 0px 20px;
         box-sizing: border-box;
-  
-    } 
+    }
 
     @media (max-width: ${dimensions.md}) {
         display: none;
-    }    
+    }
 `;
 
 const navbarItems = [
@@ -197,13 +186,13 @@ const navbarItems = [
     // { to: "/dashboard/biodiversity", title: "Biodiversity", treshold: 0 },
 ];
 
-
-
-function Navbar({ permissionLevel,
-    isAuthenticated, setAuthorizationToken, logout }) {
-
+function Navbar({
+    permissionLevel,
+    isAuthenticated,
+    setAuthorizationToken,
+    logout,
+}) {
     const handleLogout = () => {
-
         logout().then((response) => {
             if (response.action.payload.status == 200) {
                 localStorage.removeItem("token");
@@ -216,15 +205,17 @@ function Navbar({ permissionLevel,
         <Menu>
             {navbarItems.map((item, index) => (
                 <>
-                    {permissionLevel >= item.treshold &&
+                    {permissionLevel >= item.treshold && (
                         <Menu.Item key={index}>
-                            <Link className='link' to={item.to}>{item.title}</Link>
+                            <Link className="link" to={item.to}>
+                                {item.title}
+                            </Link>
                         </Menu.Item>
-                    }
+                    )}
                 </>
             ))}
             <Menu.Item key={index}>
-                <div onClick={handleLogout} className='link'>
+                <div onClick={handleLogout} className="link">
                     Logout
                 </div>
             </Menu.Item>
@@ -233,50 +224,53 @@ function Navbar({ permissionLevel,
     return (
         <FlexContainer>
             <Logo>
-                <img className="logo" src='logo_mobile.svg' alt="DeNIS" />
+                <img className="logo" src="logo_mobile.svg" alt="DeNIS" />
 
-                <div className='menu'>
+                <div className="menu">
                     {/* <img className="logo" src='logo.svg' alt="DeNIS" /> */}
-                    <Dropdown overlay={!isAuthenticated ?
-                        <Menu>
-                            <Menu.Item>
-                                <Link to="/login">
-                                    Account
-                                </Link>
-                            </Menu.Item>
-                        </Menu>
-                        : menu}>
+                    <Dropdown
+                        overlay={
+                            !isAuthenticated ? (
+                                <Menu>
+                                    <Menu.Item>
+                                        <Link to="/login">Account</Link>
+                                    </Menu.Item>
+                                </Menu>
+                            ) : (
+                                menu
+                            )
+                        }
+                    >
                         <img src="/images/icons/menu_main.svg" alt="menu" />
                     </Dropdown>
                 </div>
             </Logo>
 
-
-            {isAuthenticated ?
+            {isAuthenticated ? (
                 <Login>
-                    <img className="logo" src='logo.svg' alt="DeNIS" />
+                    <img className="logo" src="logo.svg" alt="DeNIS" />
                     {navbarItems.map((item, index) => (
                         <>
-                            {
-                                permissionLevel >= item.treshold &&
-                                <Link key={index} className='link' to={item.to}>
+                            {permissionLevel >= item.treshold && (
+                                <Link key={index} className="link" to={item.to}>
                                     {item.title}
                                 </Link>
-                            }
-
-
+                            )}
                         </>
-
                     ))}
 
-                    <div onClick={handleLogout} className='link'>
+                    <div onClick={handleLogout} className="link">
                         Logout
                     </div>
-                </Login> : <Login>
-                    <img className="logo" src='logo.svg' alt="DeNIS" />
-                    <Link className='link login' to="/login">Account</Link>
                 </Login>
-            }
+            ) : (
+                <Login>
+                    <img className="logo" src="logo.svg" alt="DeNIS" />
+                    <Link className="link login" to="/login">
+                        Account
+                    </Link>
+                </Login>
+            )}
             {/* 
             {isAuthenticated &&
                 <MenuIcon>
@@ -285,9 +279,8 @@ function Navbar({ permissionLevel,
                     </Dropdown>
                 </MenuIcon>
             } */}
-
         </FlexContainer>
-    )
+    );
 }
 
 const mapDispatchToProps = (dispatch) => {

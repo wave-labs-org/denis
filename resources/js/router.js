@@ -21,6 +21,7 @@ import Registration from "./components/Registration";
 import Authentication from "./components/Authentication";
 import MapContainer from "./components/MapContainer";
 import Collection from "./components/Dashboard/Components/Collection/Collection";
+import Repository from "./components/Repository";
 
 export const history = createBrowserHistory();
 
@@ -29,6 +30,7 @@ const Router = () => {
         <BrowserRouter history={history}>
 
             <Routes>
+                <Route path="/repositories/*" element={<Layout><Repository /></Layout>} />
                 <Route exact path="/map" element={<Layout><MapContainer /></Layout>} />
                 <Route exact path="/login" element={<Layout><Authentication title="sign in"><Login /></Authentication></Layout>} />
                 <Route exact path="/register" element={<Layout><Authentication title="sign up"><Registration /></Authentication></Layout>} />

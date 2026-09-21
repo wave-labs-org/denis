@@ -1,10 +1,10 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { dimensions, maxWidth } from './dashboardHelper';
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { dimensions, maxWidth } from "./dashboardHelper";
 import { connect } from "react-redux";
-import { logout, setAuthorizationToken } from '../../redux/auth/actions';
-import { Divider, Dropdown, Menu, Space } from 'antd';
+import { logout, setAuthorizationToken } from "../../redux/auth/actions";
+import { Divider, Dropdown, Menu, Space } from "antd";
 
 const FlexContainer = styled.section`
     position: static;
@@ -27,7 +27,7 @@ const FlexContainer = styled.section`
     }
 
     @media (max-width: ${dimensions.md}) {
-        justify-content:space-between;
+        justify-content: space-between;
         align-items: center;
         padding: 20px;
     }
@@ -35,27 +35,26 @@ const FlexContainer = styled.section`
 
 const Logo = styled(Link)`
     width: 50%;
-    color: white;   
+    color: white;
 
     h1 {
         width: 100%;
         box-sizing: border-box;
-        margin:0px;
+        margin: 0px;
         font-size: clamp(40px, 6vw, 50px);
         color: inherit;
         font-weight: 900;
         line-height: 94%;
-        font-family: 'Prata', serif;
+        font-family: "Prata", serif;
         letter-spacing: 0.041em;
-        color: white; 
+        color: white;
     }
 
     &:hover {
         h1 {
-            color: white; 
+            color: white;
         }
     }
-    
 `;
 
 const Avatar = styled.div`
@@ -83,17 +82,17 @@ const Login = styled.div`
     align-items: center;
     gap: 20px;
     font-size: 18px;
-    
+
     .link {
         cursor: pointer;
         font-size: 16px;
         font-weight: bold;
-        color: rgba(255,255,255, .8); 
+        color: rgba(255, 255, 255, 0.8);
 
         &:hover {
             color: white;
         }
-    }   
+    }
 
     @media (max-width: ${dimensions.xl}) {
         display: none;
@@ -125,7 +124,6 @@ const MenuIcon = styled.div`
     }
 `;
 
-
 const navbarItems = [
     { to: "/dashboard/", title: "Profile", treshold: 0 },
     { to: "/dashboard/collections", title: "Collections", treshold: 0 },
@@ -135,12 +133,14 @@ const navbarItems = [
     { to: "/dashboard/biodiversity", title: "Biodiversity", treshold: 0 },
 ];
 
-
-function Navbar({ permissionLevel, user,
-    isAuthenticated, setAuthorizationToken, logout }) {
-
+function Navbar({
+    permissionLevel,
+    user,
+    isAuthenticated,
+    setAuthorizationToken,
+    logout,
+}) {
     const handleLogout = () => {
-
         logout().then((response) => {
             if (response.action.payload.status == 200) {
                 localStorage.removeItem("token");
@@ -163,7 +163,7 @@ function Navbar({ permissionLevel, user,
 
             <Divider />*/}
             <Menu.Item key={index}>
-                <div onClick={handleLogout} className='link'>
+                <div onClick={handleLogout} className="link">
                     Logout
                 </div>
             </Menu.Item>
@@ -176,46 +176,56 @@ function Navbar({ permissionLevel, user,
                 <h1>DeNIS</h1>
             </Logo>
             <Login>
-
-                {isAuthenticated ?
+                {isAuthenticated ? (
                     <>
                         {navbarItems.map((item, index) => (
                             <>
-                                {
-                                    permissionLevel >= item.treshold &&
-                                    <Link key={index} className='link' to={item.to}>
+                                {permissionLevel >= item.treshold && (
+                                    <Link
+                                        key={index}
+                                        className="link"
+                                        to={item.to}
+                                    >
                                         {item.title}
                                     </Link>
-                                }
-
-
+                                )}
                             </>
-
                         ))}
                         <Dropdown overlay={menu}>
                             <Avatar onClick={(e) => e.preventDefault()}>
-                                <img src={user?.image} alt="profile" className='user-image' />
-                                <img src="/images/icons/dashboard/dropdown_white.svg" alt="dropdown" className='dropdown-icon' />
+                                <img
+                                    src={user?.image}
+                                    alt="profile"
+                                    className="user-image"
+                                />
+                                <img
+                                    src="/images/icons/dashboard/dropdown_white.svg"
+                                    alt="dropdown"
+                                    className="dropdown-icon"
+                                />
                             </Avatar>
                         </Dropdown>
-
                     </>
-                    : <Link className='link' to="/login">Login</Link>}
-
+                ) : (
+                    <Link className="link" to="/login">
+                        Login
+                    </Link>
+                )}
             </Login>
 
             <MenuIcon>
-                {isAuthenticated ?
+                {isAuthenticated ? (
                     <Dropdown overlay={menu}>
                         <img src="/images/icons/menu_white.svg" alt="menu" />
                     </Dropdown>
-
-                    :
-                    <Link className='link' to="/login">Login</Link>}
-
+                ) : (
+                    <Link className="link" to="/login">
+                        Login
+                    </Link>
+                )}
             </MenuIcon>
         </FlexContainer>
-    )
+    );
 }
 
 const mapDispatchToProps = (dispatch) => {

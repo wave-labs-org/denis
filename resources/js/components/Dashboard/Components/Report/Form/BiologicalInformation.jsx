@@ -87,32 +87,6 @@ function BiologicalInformation({ name, handleDelete, length, form }) {
 
         }
         setLoading(false);
-
-
-
-        // if (aphias.length) {
-        //     const info = await (await fetch(
-        //         `${url}/AphiaRecordByAphiaID/${aphia_id}`
-        //     )).json();
-
-        //     const sources = await (await fetch(
-        //         `${url}/AphiaSourcesByAphiaID/${aphia_id}`
-        //     )).json();
-
-        //     var ref = undefined;
-        //     sources.map((source) => {
-        //         if (source.use == "basis of record") {
-        //             ref = source.reference;
-        //         }
-        //     })
-
-        //     updateFields({ authority: info.valid_authority, reference: info.reference, reference: ref })
-
-        // } else {
-        //     updateFields({ authority: undefined, reference: undefined, reference: undefined })
-        // }
-
-
     }
 
     const updateFields = (values) => {

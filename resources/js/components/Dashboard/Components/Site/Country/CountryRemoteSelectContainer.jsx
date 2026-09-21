@@ -1,13 +1,18 @@
-import { Select, Form } from 'antd';
-import React, { useEffect } from 'react'
+import { Select, Form } from "antd";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchSiteCountriesSelector } from "../../../../../redux/siteCountry/actions";
 
-function CountryRemoteSelectContainer({ fetchSiteCountriesSelector, data, loading, value, onChange }) {
+function CountryRemoteSelectContainer({
+    fetchSiteCountriesSelector,
+    data,
+    loading,
+    value,
+    onChange,
+}) {
     useEffect(() => {
-        fetchSiteCountriesSelector()
-    }, [])
-
+        fetchSiteCountriesSelector();
+    }, []);
 
     return (
         <Select
@@ -17,18 +22,23 @@ function CountryRemoteSelectContainer({ fetchSiteCountriesSelector, data, loadin
             showSearch
             placeholder="Select a country"
             optionFilterProp="name"
-            filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}
+            filterOption={(input, option) =>
+                option.children.toLowerCase().includes(input.toLowerCase())
+            }
         >
             {data.map((element) => (
-                <Select.Option key={element.id} value={element.id}>{element.value}</Select.Option>
+                <Select.Option key={element.id} value={element.id}>
+                    {element.value}
+                </Select.Option>
             ))}
         </Select>
-    )
+    );
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchSiteCountriesSelector: (filters) => dispatch(fetchSiteCountriesSelector(filters)),
+        fetchSiteCountriesSelector: (filters) =>
+            dispatch(fetchSiteCountriesSelector(filters)),
     };
 };
 
@@ -39,4 +49,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CountryRemoteSelectContainer);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(CountryRemoteSelectContainer);
